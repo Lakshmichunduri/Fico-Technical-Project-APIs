@@ -12,7 +12,7 @@ import apis.source.model.Bankers;
 public class BankersResponse {
 	private List<Bankers> bankersList;
 	private Bankers banker;
-	private boolean usernameExists;
+	private String usernameExists = "true";
 
 	public Bankers getBanker() {
 		return banker;
@@ -29,13 +29,14 @@ public class BankersResponse {
 	public void setBankersList(List<Bankers> bankersList) {
 		this.bankersList = bankersList;
 	}
-	
-	public boolean isUsernameExists() {
+
+	public String getUsernameExists() {
 		return usernameExists;
 	}
 
-	public void setUsernameExists(boolean usernameExists) {
+	public void setUsernameExists(String usernameExists) {
 		this.usernameExists = usernameExists;
 	}
+	
 
 }

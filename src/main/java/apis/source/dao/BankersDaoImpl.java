@@ -59,14 +59,14 @@ public class BankersDaoImpl implements BankersDao {
 	}
 	
 	@Override
-	public boolean usernameExists(String username) {
+	public String usernameExists(String username) {
 		Session session = getSession();
 		Criteria criteria = session.createCriteria(Bankers.class).add(Restrictions.eq("username", username));
 		List<Bankers> bankers = criteria.list();
 		if(bankers.size() == 0) {
-			return false;
+			return "false";
 		}
-		return true;
+		return "true";
 	}
 	
 	public Integer getMaxBankersInTable() 

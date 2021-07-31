@@ -13,6 +13,6 @@ public interface BankersDao {
 	
 	public Bankers getPassword(String username);
 	
-	public boolean usernameExists(String username);
+	public String usernameExists(String username);
 
 }
