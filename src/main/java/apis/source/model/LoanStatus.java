@@ -3,10 +3,11 @@ package apis.source.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="loan_status")
-public class LoanStatus {
+public class LoanStatus implements Serializable{
 	
 	@Id
 	private int id;

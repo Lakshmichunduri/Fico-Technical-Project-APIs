@@ -12,7 +12,7 @@ public class CustomerResponse {
 
 	private Customer customer;
 	
-	private boolean usernameExists;
+	private String usernameExists = "true";
 
 	public Customer getCustomer() {
 		return customer;
@@ -22,12 +22,11 @@ public class CustomerResponse {
 		this.customer = customer;
 	}
 
-	public boolean isUsernameExists() {
+	public String getUsernameExists() {
 		return usernameExists;
 	}
 
-	public void setUsernameExists(boolean usernameExists) {
+	public void setUsernameExists(String usernameExists) {
 		this.usernameExists = usernameExists;
 	}
-	
 }

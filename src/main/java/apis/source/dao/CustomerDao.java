@@ -12,5 +12,5 @@ public interface CustomerDao {
 	
 	public Customer updateCustomer(Customer customer);
 	
-	public boolean usernameExists(String username);
+	public String usernameExists(String username);
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import apis.source.dto.AddressResponse;
 import apis.source.dto.MaritalStatusResponse;
+import apis.source.model.Address;
 import apis.source.model.Customer;
 import apis.source.model.MaritalStatus;
 import apis.source.service.AddressService;
@@ -55,9 +56,18 @@ public class CustomerDaoImpl implements CustomerDao{
 		customer.setCustomerId(getMaxCustomerIdInTable()+1);
 		
 		//add address in address table and set their id in customer table
-		AddressResponse addressResponse = addressService.setAddress(customer.getAddress());
+		Address customerAddress = new Address();
+		if(customer.getAddress() != null) {
+			customerAddress = customer.getAddress();
+		}
+		AddressResponse addressResponse = addressService.setAddress(customerAddress);
 		customer.setAddressId(addressResponse.getAddress().getAddressId());
-		AddressResponse employmentAddressResponse = addressService.setAddress(customer.getEmploymentAddress());
+		
+		Address customerEmploymentAddress = new Address();
+		if(customer.getEmploymentAddress() != null) {
+			customerAddress = customer.getEmploymentAddress();
+		}
+		AddressResponse employmentAddressResponse = addressService.setAddress(customerEmploymentAddress);
 		customer.setEmploymentAddressId(employmentAddressResponse.getAddress().getAddressId());
 		
 		//set maritalStatus
@@ -119,14 +129,14 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 	
 	@Override
-	public boolean usernameExists(String username) {
+	public String usernameExists(String username) {
 		Session session = getSession();
 		Criteria criteria = session.createCriteria(Customer.class).add(Restrictions.eq("username", username));
 		List<Customer> customers = criteria.list();
 		if(customers.size() == 0) {
-			return false;
+			return "false";
 		}
-		return true;
+		return "true";
 	}
 	
 	public Integer getMaxCustomerIdInTable() {
