@@ -34,6 +34,9 @@ public class Application implements Serializable{
 	@Column(name="LOAN_PURPOSE")
 	private String loanPurpose;
 	
+	@Column(name="LOAN_PURPOSE_ID")
+	private int loanPurposeId;
+	
 	@Column(name="DESCRIPTION")
 	private String description;
 	
@@ -119,5 +122,13 @@ public class Application implements Serializable{
 
 	public void setDeclineReason(String declineReason) {
 		this.declineReason = declineReason;
+	}
+
+	public int getLoanPurposeId() {
+		return loanPurposeId;
+	}
+
+	public void setLoanPurposeId(int loanPurposeId) {
+		this.loanPurposeId = loanPurposeId;
 	}
 }

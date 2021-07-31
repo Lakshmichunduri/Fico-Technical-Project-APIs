@@ -9,9 +9,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import apis.source.model.Customer;
 import apis.source.model.LoanPurpose;
 import apis.source.model.LoanStatus;
 
@@ -40,65 +42,25 @@ public class LoanPurposeDaoImpl implements LoanPurposeDao {
 		return loanpurposes;
 	}
 
-//	@Override
-//	public LoanPurpose getPurposeById(Integer id) {
-//		Session session = getSession();
-//		LoanPurpose loanpurpose = (LoanPurpose) session.get(LoanPurpose.class, id);
-//		return loanpurpose;
-//	}
-
 	@Override
-	public LoanPurpose getIdByPurpose(String Purpose) {
+	public LoanPurpose getIdByPurpose(String purpose) {
 		Session session = getSession();
-		Query query = session.createSQLQuery("Select id from loan_purpose where purpose='"+Purpose+"'");
 		LoanPurpose loanPurpose = new LoanPurpose();
-		List<Integer> ids = query.list();
+		Criteria criteria = session.createCriteria(LoanPurpose.class).add(Restrictions.eq("purpose", purpose));
+		List<LoanPurpose> loanPurposes = criteria.list();
 		
-		if((ids.size() != 0) && (ids.get(0) != null)) {
-			loanPurpose.setId(ids.get(0));
+		if((loanPurposes.size() != 0) && (loanPurposes.get(0) != null)) {
+			return loanPurposes.get(0);
 		}
 		return loanPurpose;
 	}
-
-	
-	
-	// CHECK THIS ONCE 
-	// WE NEED TO FIX THE PURPOSE AND ID IN THIS MANNER FOR THE MODEL TO WORK 
-	
 	
 	@Override
 	public void addPurpose(LoanPurpose loanPurpose) {
 		Session session = getSession();
-		
 		loanPurpose.setUniqueId(getUniqueId());
-		
-		String [] purpose0 = {"credit_card","major_purchase","wedding" };
-		String [] purpose1 = {"car","house","vacation","home_improvement" };
-		// String [] purpose2 = {"other","debt_consolidation","educational","medical","moving","renewable_energy","small_business"};
-		
-		if(Arrays.asList(purpose0).contains(loanPurpose.getPurpose())){
-			loanPurpose.setId(0);
-		}
-		else if(Arrays.asList(purpose1).contains(loanPurpose.getPurpose())) {
-			loanPurpose.setId(1);
-		}
-		else {
-			loanPurpose.setId(2);
-		}
 		session.save(loanPurpose);
 		
-	}
-	// FUNCTION FOR GENERATING NEXT LOAN_PURPOSE ID
-	public Integer getMaxLoanPurposeInTable() 
-	{
-		Session session = getSession();
-		Query query = session.createSQLQuery("select max(ID) from loan_purpose");
-		List<Integer> maxId = query.list();
-		if((maxId.size() != 0) && (maxId.get(0) != null)) 
-		{
-			return maxId.get(0);
-		}
-		return 0;
 	}
 	
 	public String getUniqueId() {

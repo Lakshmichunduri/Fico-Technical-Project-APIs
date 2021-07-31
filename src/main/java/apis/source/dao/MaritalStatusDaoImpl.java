@@ -45,13 +45,6 @@ public class MaritalStatusDaoImpl implements MaritalStatusDao{
 		return maritalStatus;
 	}
 
-//	@Override
-//	public void setMaritalStatus(MaritalStatus maritalStatus) {
-//		Session session = getSession();
-//		session.save(maritalStatus);
-//		
-//	}
-
 	@Override
 	public void setMaritalStatus(MaritalStatus maritalStatus) {
 		// TODO Auto-generated method stub

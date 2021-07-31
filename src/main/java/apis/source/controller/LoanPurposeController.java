@@ -35,7 +35,7 @@ public class LoanPurposeController {
 //	}
 	
 	
-	@GetMapping("/status/{status}")
+	@GetMapping("/purpose/{purpose}")
 	public LoanPurposeResponse getIdByPurpose(@PathVariable String purpose)
 	{
 		return loanPurposeService.getIdByPurpose(purpose);

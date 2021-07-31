@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import apis.source.dto.AddressResponse;
 import apis.source.dto.MaritalStatusResponse;
 import apis.source.model.Address;
+import apis.source.model.Application;
 import apis.source.model.Customer;
 import apis.source.model.MaritalStatus;
 import apis.source.service.AddressService;
@@ -101,12 +102,11 @@ public class CustomerDaoImpl implements CustomerDao{
 	@Override
 	public Customer getPassword(String username) {
 		Session session = getSession();
-		Query query = session.createSQLQuery("select PASSWORD from customer where USERNAME = '" + username + "'");
-		List<String> customers = query.list();
-		//System.out.println(customers);
+		Criteria criteria = session.createCriteria(Customer.class).add(Restrictions.eq("username", username));
+		List<Customer> customers = criteria.list();
 		Customer customer = new Customer();
 		if((customers.size() != 0) && (customers.get(0) != null)) {
-			customer.setPassword(customers.get(0));
+			return customers.get(0);
 		}
 		return customer;
 	}

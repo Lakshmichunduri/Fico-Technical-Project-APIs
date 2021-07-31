@@ -14,10 +14,11 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import apis.source.dto.LoanPurposeResponse;
 import apis.source.model.Application;
 import apis.source.model.MaritalStatus;
 import apis.source.service.ApplicationService;
-
+import apis.source.service.LoanPurposeService;
 import apis.util.Utility;
 
 @Repository
@@ -28,6 +29,9 @@ public class ApplicationDaoImpl implements ApplicationDao{
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private LoanPurposeService loanPurposeService;
 	
 	private Utility<Application> utility = new Utility<>();
 	
@@ -45,6 +49,8 @@ public class ApplicationDaoImpl implements ApplicationDao{
 	public void addApplication(Application application) {
 		Session session = getSession();
 		application.setApplicationId(getMaxApplicationIdInTable()+1);
+		LoanPurposeResponse loanPurposeResponse = loanPurposeService.getIdByPurpose(application.getLoanPurpose());
+		application.setLoanPurposeId(loanPurposeResponse.getLoanPurpose().getId());
 		session.save(application);
 	}
 

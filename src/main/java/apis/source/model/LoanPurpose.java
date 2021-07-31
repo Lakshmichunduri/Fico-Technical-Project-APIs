@@ -1,5 +1,6 @@
 package apis.source.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class LoanPurpose implements Serializable {
 	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="UNIQUE_ID")
 	private String uniqueId;
 	private int id;
 	private String purpose;
