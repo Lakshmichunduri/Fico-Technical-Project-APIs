@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import apis.source.model.Application;
+import apis.source.model.BureauData;
+import apis.util.BureauResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
@@ -15,6 +17,16 @@ public class ApplicationResponse {
 	private Application application;
 	
 	private List<Application> applications;
+	
+	private BureauResponse bureauResponse;
+
+	public BureauResponse getBureauResponse() {
+		return bureauResponse;
+	}
+
+	public void setBureauResponse(BureauResponse bureauResponse) {
+		this.bureauResponse = bureauResponse;
+	}
 
 	public Application getApplication() {
 		return application;

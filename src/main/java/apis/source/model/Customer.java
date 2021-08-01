@@ -74,10 +74,10 @@ public class Customer implements Serializable{
 	@Column(name="WORK_EXP_JOIN_MONTH")
 	private Integer workExpJoinMonth;
 	
-	@Column(name="WORK_EXP_YEARS")
+	@Column(name="WORK_EXP_JOIN_YEAR")
 	private Integer workExpJoinYear;
 	
-	@Column(name="WORK_EXP_JOIN_YEAR")
+	@Column(name="WORK_EXP_YEARS")
 	private Integer workExpYears;
 	
 	@Column(name="WORK_EXP_MONTHS")

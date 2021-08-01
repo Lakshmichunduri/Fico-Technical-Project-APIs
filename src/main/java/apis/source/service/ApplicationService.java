@@ -19,7 +19,8 @@ public class ApplicationService {
 	
 	public ApplicationResponse addApplication(Application application) {
 		ApplicationResponse applicationResponse = new ApplicationResponse();
-		applicationDao.addApplication(application);
+		applicationResponse.setBureauResponse(applicationDao.addApplication(application));
+		//applicationDao.addApplication(application);
 		applicationResponse.setApplication(application);
 		return applicationResponse;
 	}

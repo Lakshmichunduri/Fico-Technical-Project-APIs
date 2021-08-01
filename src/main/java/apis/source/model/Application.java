@@ -13,20 +13,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name="application")
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(Include.NON_NULL)
 public class Application implements Serializable{
 	
 	@Id
 	@Column(name="APPLICATION_ID")
 	private Integer applicationId;
 	
+	@Column(name="APPLICANT_NAME")
+	private String applicantName;
+	
 	@Column(name="TIME_STAMP")
-	private Timestamp timeStamp;
+	private Date timeStamp;
 	
 	@Column(name="LOAN_AMOUNT")
 	private Integer loanAmount;
@@ -60,11 +62,19 @@ public class Application implements Serializable{
 		this.applicationId = applicationId;
 	}
 
-	public Timestamp getTimeStamp() {
+	public String getApplicantName() {
+		return applicantName;
+	}
+
+	public void setApplicantName(String applicantName) {
+		this.applicantName = applicantName;
+	}
+
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Timestamp timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 	

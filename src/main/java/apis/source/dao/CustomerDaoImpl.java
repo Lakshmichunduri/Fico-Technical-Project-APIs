@@ -74,9 +74,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		//set maritalStatus
 		MaritalStatusResponse maritalStatusResponse = maritalStatusService.getMaritalStatusByStatus(customer.getMaritalStatus());
 		customer.setMaritalStatusId(maritalStatusResponse.getMaritalStatus().getId());
-		
-		long millis=System.currentTimeMillis();
-		customer.setDateOfBirth(new Date(millis));
+
 		session.save(customer);
 		
 	}

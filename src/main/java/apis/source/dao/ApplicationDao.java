@@ -3,10 +3,12 @@ package apis.source.dao;
 import java.util.List;
 
 import apis.source.model.Application;
+import apis.source.model.BureauData;
+import apis.util.BureauResponse;
 
 public interface ApplicationDao {
 	
-	public void addApplication(Application application);
+	public BureauResponse addApplication(Application application);
 	
 	public Application getApplication(Integer applicationId);
 	
