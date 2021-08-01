@@ -73,6 +73,8 @@ public class ApplicationDaoImpl implements ApplicationDao{
 		
 		session.save(application);
 		
+		BureauResponse bureauResponse = new BureauResponse();
+		
 		//get customerdata with customerid
 		CustomerResponse customerResponse = customerService.getCustomer(application.getCustomerId());
 		Customer customer = customerResponse.getCustomer();
@@ -83,10 +85,14 @@ public class ApplicationDaoImpl implements ApplicationDao{
 		
 		//processing the year
 		String yearInString = bureauData.getEarliest_cr_line();
-		String[] yearList = (yearInString.split(" "));
-		String[] dates  = (yearList[0].split("/"));
-		
-		BureauResponse bureauResponse = new BureauResponse();
+		if(yearInString == null) {
+			bureauResponse.setYear(0);
+		}
+		else {
+			String[] yearList = (yearInString.split(" "));
+			String[] dates  = (yearList[0].split("/"));
+			bureauResponse.setYear(Integer.parseInt(dates[2]));
+		}
 		
 		bureauResponse.setAnnual_inc(customer.getAnnualSalary());
 		bureauResponse.setDelinq_2yrs(bureauData.getDelinq_2yrs());
@@ -101,7 +107,6 @@ public class ApplicationDaoImpl implements ApplicationDao{
 		bureauResponse.setRevol_bal(bureauData.getRevol_bal());
 		bureauResponse.setRevol_util(bureauData.getRevol_util());
 		bureauResponse.setTotal_acc(bureauData.getTotal_acc());
-		bureauResponse.setYear(Integer.parseInt(dates[2]));
 		
 		return bureauResponse;
 		
